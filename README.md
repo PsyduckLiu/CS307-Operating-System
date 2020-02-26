@@ -1,5 +1,5 @@
 # CS307-Operating-System
-> 2020.Spring SJTU CS307 projects and slides  
+> 2020.Spring SJTU CS307 projects 
 > Only part of the projects in the book are implemented here
 
 ## This course mainly introduces operating systems. Successful course participants will,  
@@ -19,21 +19,3 @@
 * Project8: Designing a Virtual Memory Manager
 * src: the official downloaded source code(based which you can implement your own algorithm)
 
-## Slide Overview
-* Lec1-OS
-* Lec2-OS
-* Lec3-OS
-* Lec4-OS
-* Lec5-OS
-* Lec6-OS
-* Lec7-OS
-* Lec8-OS
-* Lec9-OS
-* Lec10-OS
-* Lec11-OS
-* Lec12-OS
-* Lec13-OS
-* Lec14-OS
-* Lec15-OS
-* Lec18-OS
-* Summary
