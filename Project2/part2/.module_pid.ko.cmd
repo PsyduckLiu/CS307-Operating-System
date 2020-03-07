@@ -1,0 +1,1 @@
+cmd_/home/psyduckliu/Desktop/OS/Project2/part2/module_pid.ko := ld -r -m elf_x86_64 -z max-page-size=0x200000 -T ./scripts/module-common.lds --build-id  -o /home/psyduckliu/Desktop/OS/Project2/part2/module_pid.ko /home/psyduckliu/Desktop/OS/Project2/part2/module_pid.o /home/psyduckliu/Desktop/OS/Project2/part2/module_pid.mod.o ;  true
