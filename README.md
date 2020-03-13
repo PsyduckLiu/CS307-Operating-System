@@ -9,6 +9,7 @@
 * The idea of the course is to learn how computers really work, from the chip level up to the application level. You will understand what is actually happening when a computer system is running a set of programs, and will be able to make informed choices as a developer, project manager, or system customer.
 
 ## Project Overview
+* Project0: Compiling Linux Kernel
 * Project1: Introduction to linux kernel module
 * Project2: Unix shell programming & linux kernel module for task information
 * Project3: Multithreaded Sorting Application & Fork-Join Sorting Application 
