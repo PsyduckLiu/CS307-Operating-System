@@ -1,3 +1,11 @@
+/******************************************************
+> Author       : HaolinLiu 
+> Last modified: 2020-03-21 21:40
+> Email        : 25915043@qq.com
+> Filename     : QuickSort.java
+> Description  : quick sort
+*******************************************************/
+
 import java.util.concurrent.*;
 import java.util.Scanner;
 import java.util.Arrays;

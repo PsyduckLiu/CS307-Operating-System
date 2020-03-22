@@ -1,3 +1,11 @@
+/******************************************************
+> Author       : HaolinLiu 
+> Last modified: 2020-03-21 20:38
+> Email        : 25915043@qq.com
+> Filename     : MergeSort.java
+> Description  : merge sort
+*******************************************************/
+
 import java.util.concurrent.*;
 import java.util.Scanner;
 import java.util.Arrays;

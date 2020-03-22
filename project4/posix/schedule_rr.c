@@ -1,0 +1,70 @@
+/******************************************************
+> Author       : HaolinLiu 
+> Last modified: 2020-03-22 19:41
+> Email        : 25915043@qq.com
+> Filename     : schedule_rr.c
+> Description  : Round Robin 
+*******************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "task.h"
+#include "list.h"
+#include "cpu.h"
+#include "schedulers.h"
+
+struct node *task_list = NULL;
+
+//add a task to the list
+void add(char *name, int priority, int burst) {
+    Task *new_task;
+    
+    new_task = malloc(sizeof(Task));
+    
+    new_task->name = malloc(sizeof(char) * (strlen(name) + 1));  
+    strcpy(new_task->name, name);
+    new_task->priority = priority;
+    new_task->burst = burst;
+
+    insert(&task_list, new_task);
+
+}
+
+// invoke the scheduler
+void schedule() {
+    struct node *tmp = task_list;
+    struct node *new = NULL;
+    Task *running_task = NULL;
+    int slice=0;
+    
+    while (tmp->next != NULL) {
+        insert(&new,tmp->task);
+        tmp = tmp->next;
+    }
+    insert(&new,tmp->task);
+    task_list = new;
+
+    tmp = task_list;
+
+    while (task_list != NULL) {
+        running_task = tmp->task;
+
+        if (tmp->next != NULL) 
+            tmp = tmp->next;
+        else tmp = task_list;
+        
+        if (QUANTUM < running_task->burst) 
+            slice = QUANTUM;
+        else
+            slice = running_task->burst;
+
+        run(running_task,slice);
+
+        running_task->burst -= slice;
+
+        if (running_task->burst == 0)
+            delete(&task_list,running_task);
+    }
+}
