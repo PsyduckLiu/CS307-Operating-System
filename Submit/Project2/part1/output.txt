@@ -1,0 +1,6 @@
+total 40
+-rwxrw-rw- 1 psyduckliu psyduckliu   185 Feb 27 12:23 Makefile
+-rw-r--r-- 1 psyduckliu psyduckliu     0 Apr  1 22:17 output.txt
+-rwxrwxr-x 1 psyduckliu psyduckliu 13752 Apr  1 22:16 shell_simulator
+-rwxrw-rw- 1 psyduckliu psyduckliu  8704 Apr  1 22:11 shell_simulator.c
+-rw-rw-r-- 1 psyduckliu psyduckliu  8064 Apr  1 22:16 shell_simulator.o

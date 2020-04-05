@@ -1,6 +1,6 @@
 /******************************************************
 > Author       : HaolinLiu 
-> Last modified: 2020-03-07 19:52
+> Last modified: 2020-04-01 19:52
 > Email        : 25915043@qq.com
 > Filename     : shell_simulator.c
 > Description  : a shell simulator 
@@ -46,6 +46,11 @@ int main(void)
     //initialization
     for (int i=0;i<MAX_LINE/2+1;i++) {
         args[i]=malloc(sizeof(char)*MAX_LINE);
+	cmd_args[i]=malloc(sizeof(char)*MAX_LINE);
+	first_args[i]=malloc(sizeof(char)*MAX_LINE);
+	second_args[i]=malloc(sizeof(char)*MAX_LINE);
+	out_args[i]=malloc(sizeof(char)*MAX_LINE);
+	in_args[i]=malloc(sizeof(char)*MAX_LINE);
         memset(args[i],0,sizeof(char)*MAX_LINE);
     }
     input=malloc(sizeof(char)*MAX_LINE);
@@ -77,7 +82,6 @@ int main(void)
         
         //copy the args[] to cmd_args[]
         for (int i=0;i<num_of_args;i++)  {
-            cmd_args[i]=malloc(sizeof(char)*MAX_LINE);
             cmd_args[i]=args[i];
         }
         cmd_args[num_of_args]=malloc(sizeof(char)*MAX_LINE);
@@ -98,7 +102,6 @@ int main(void)
                 printf("%s",last_input);
 
                 for (int i=0;i<num_of_args;i++)  {
-                    cmd_args[i]=malloc(sizeof(char)*MAX_LINE);
                     cmd_args[i]=args[i];  
                 }
                 cmd_args[num_of_args]=malloc(sizeof(char)*MAX_LINE);
@@ -124,7 +127,6 @@ int main(void)
             strcpy(redirect_path,args[num_of_args-1]);
 
             for (int i=0;i<num_of_args-2;i++) {
-                out_args[i]=malloc(sizeof(char)*MAX_LINE);
                 out_args[i]=args[i];
             }
             out_args[num_of_args-2]=malloc(sizeof(char)*MAX_LINE);
@@ -136,7 +138,6 @@ int main(void)
             strcpy(redirect_path,args[num_of_args-1]);
 
             for (int i=0;i<num_of_args-2;i++) {
-                in_args[i]=malloc(sizeof(char)*MAX_LINE);
                 in_args[i]=args[i];   
             }
             in_args[num_of_args-2]=malloc(sizeof(char)*MAX_LINE);
@@ -147,14 +148,12 @@ int main(void)
             if (strcmp(args[i],"|")==0) {
                 
                 for (int j=0;j<i;j++) {
-                    first_args[j]=malloc(sizeof(char)*MAX_LINE);
                     first_args[j]=args[j];
                 }
                 first_args[i]=malloc(sizeof(char)*MAX_LINE);
                 first_args[i]=NULL;
 
                 for (int j=0;j<num_of_args-i-1;j++)  {
-                    second_args[j]=malloc(sizeof(char)*MAX_LINE);
                     second_args[j]=args[i+j+1];
                 }
                 second_args[num_of_args-i-1]=malloc(sizeof(char)*MAX_LINE);
@@ -185,29 +184,29 @@ int main(void)
 						return 1;
                     }
 					
-					flag2=dup2(fd,0);
+					flag2=dup2(flag1,0);
                     if (flag2<0) {
                         fprintf(stderr,"Dup2 Failed");
 						return 1;
                     }
                     
-					close(flag2);
+					close(flag1);
                 }
 
                 if (out_redirect_flag) {
-                    flag1=open(redirect_path, O_WRONLY | O_TRUNC | O_CREAT,0644);
+                    flag1=open(redirect_path, O_WRONLY | O_CREAT | O_APPEND,0644);
                     if (flag1<0) {
                         fprintf(stderr,"Open Failed");
 						return 1;
                     }
 					
-					flag2=dup2(fd,1);
+					flag2=dup2(flag1,1);
                     if(flag2<0) {
                         fprintf(stderr,"Dup2 Failed");
 						return 1;
                     }
 					
-                    close(flag2);
+                    close(flag1);
                 }
 
                 //handle with the pipe
@@ -271,21 +270,8 @@ int main(void)
             }
         }
 		
-		for (int i=0;i<=num_of_args;i++)  {
-            free(cmd_args[i]);
-			free(in_args[i]);
-			free(out_args[i]);
-			free(first_args[i]);
-			free(second_args[i]);
-		}
     }
 	
-	for (int i=0;i<MAX_LINE/2+1;i++) {
-        free(args[i]);
-    }
-    free(input);
-    free(last_input);
-    free(redirect_path);
 	
 
     return 0;
