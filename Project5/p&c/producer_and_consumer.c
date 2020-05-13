@@ -21,7 +21,7 @@ buffer_item buffer[BUFFER_SIZE];
 pthread_mutex_t mutex;
 sem_t empty; 
 sem_t full; 
-int head,tail,turn;
+int head,tail;
 
 int insert_item(buffer_item item) {
 	/* insert item into buffer
@@ -52,7 +52,7 @@ int remove_item(buffer_item *item) {
 
 void init()
 {
-    head=tail=turn=0;
+    head=tail=0;
 	
     pthread_mutex_init(&mutex,NULL);
 	sem_init(&full,0,0);
